@@ -1,0 +1,35 @@
+name: CI
+
+on:
+    pull_request:
+        branches:
+            - develop
+            - test
+            - stage
+            - main
+    push:
+        branches:
+            - develop
+            - test
+            - stage
+            - main
+permissions:
+    contents: read
+
+jobs:
+    project-structure:
+        name: Project structure check
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
+
+            - name: Show project files
+              run: ls -la
+
+            - name: Check required folders
+              run: |
+                  test -d frontend
+                  test -d backend
+                  test -d .github/workflows
