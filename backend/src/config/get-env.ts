@@ -1,13 +1,29 @@
-export function getEnv(key: string, defaultValue?: string): string {
+export function getRequiredEnv(key: string): string {
   const value = process.env[key];
 
-  if (value) {
-    return value;
+  if (!value) {
+    throw new Error(`Missing required environment variable: ${key}`);
   }
 
-  if (defaultValue !== undefined) {
+  return value;
+}
+
+export function getOptionalEnv(key: string, defaultValue: string): string {
+  return process.env[key] || defaultValue;
+}
+
+export function getNumberEnv(key: string, defaultValue: number): number {
+  const value = process.env[key];
+
+  if (!value) {
     return defaultValue;
   }
 
-  throw new Error(`Missing required environment variable: ${key}`);
+  const numberValue = Number(value);
+
+  if (Number.isNaN(numberValue)) {
+    throw new Error(`Environment variable ${key} must be a number`);
+  }
+
+  return numberValue;
 }

@@ -11,5 +11,7 @@ describe("App", () => {
     ).toBeInTheDocument();
 
     expect(screen.getByText(/frontend is running./i)).toBeInTheDocument();
+    expect(screen.getByText(/environment:/i)).toBeInTheDocument();
+    expect(screen.getByText(/api url:/i)).toBeInTheDocument();
   });
 });
