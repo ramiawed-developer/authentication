@@ -1,13 +1,14 @@
 import cors from "cors";
 import express from "express";
-import { healthRouter } from "./routes/health.routes";
+import { healthRouter } from "./routes/health.routes.js";
+import { env } from "./config/env.js";
 
 export function createApp() {
   const app = express();
 
   app.use(
     cors({
-      origin: process.env.FRONTENT_URL ?? "http://localhost:5173",
+      origin: env.frontendUrl,
     }),
   );
 

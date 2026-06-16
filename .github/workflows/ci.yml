@@ -25,6 +25,14 @@ jobs:
       run:
         working-directory: backend
 
+    env:
+      NODE_ENV: test
+      PORT: 3001
+      FRONTEND_URL: http://localhost:5173
+      AUTH0_DOMAIN: test-domain.example.com
+      AUTH0_AUDIENCE: https://api.test.example.com
+      DATABASE_URL: postgresql://test_user:test_password@localhost:5432/auth0_fullstack_test
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -58,6 +66,13 @@ jobs:
     defaults:
       run:
         working-directory: frontend
+
+    env:
+      VITE_APP_ENV: test
+      VITE_API_BASE_URL: http://localhost:3001
+      VITE_AUTH0_DOMAIN: test-domain.example.com
+      VITE_AUTH0_CLIENT_ID: test-client-id
+      VITE_AUTH0_AUDIENCE: https://api.test.example.com
 
     steps:
       - name: Checkout code
