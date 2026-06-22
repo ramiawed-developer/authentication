@@ -17,15 +17,15 @@ function getAppEnv(): AppEnvironment {
   );
 }
 
-// function getRequiredViteEnv(key: string): string {
-//   const value = import.meta.env[key];
+function getRequiredViteEnv(key: string): string {
+  const value = import.meta.env[key];
 
-//   if (!value) {
-//     throw new Error(`Missing required frontend environment variable: ${key}`);
-//   }
+  if (!value) {
+    throw new Error(`Missing required frontend environment variable: ${key}`);
+  }
 
-//   return value;
-// }
+  return value;
+}
 
 function getOptionalViteEnv(key: string, defaultValue: string): string {
   return import.meta.env[key] || defaultValue;
@@ -36,8 +36,8 @@ export const env = {
   apiBaseUrl: getOptionalViteEnv("VITE_API_BASE_URL", "http://localhost:3001"),
 
   auth0: {
-    domain: import.meta.env.VITE_AUTH0_DOMAIN || "",
-    clientId: import.meta.env.VITE_AUTH0_CLIENT_ID || "",
-    audience: import.meta.env.VITE_AUTH0_AUDIENCE || "",
+    domain: getRequiredViteEnv("VITE_AUTH0_DOMAIN"),
+    clientId: getRequiredViteEnv("VITE_AUTH0_CLIENT_ID"),
+    audience: getRequiredViteEnv("VITE_AUTH0_AUDIENCE"),
   },
 } as const;

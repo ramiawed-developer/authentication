@@ -8,7 +8,8 @@ export default function App() {
       <p>Frontend is running.</p>
       <p>Environment: {env.appEnv}</p>
       <p>API URL: {env.apiBaseUrl}</p>
-
+      <p>Auth0 Domain: {env.auth0.domain}</p>
+      <p>Auth0 Audience: {env.auth0.audience}</p>
       <hr />
 
       <BackendStatus />
