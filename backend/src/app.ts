@@ -9,7 +9,7 @@ export function createApp() {
   app.use(
     cors({
       origin: env.frontendUrl,
-    }),
+    })
   );
 
   app.use(express.json());

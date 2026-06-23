@@ -39,8 +39,6 @@ describe("AuthStatus", () => {
 
     render(<AuthStatus />);
 
-    expect(screen.getByRole("alert")).toHaveTextContent(
-      "Authentication error: Auth failed",
-    );
+    expect(screen.getByRole("alert")).toHaveTextContent("Authentication error: Auth failed");
   });
 });

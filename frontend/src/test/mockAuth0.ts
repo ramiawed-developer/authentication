@@ -12,12 +12,7 @@ type MockAuth0State = {
   };
 };
 
-export function mockUseAuth0({
-  isAuthenticated,
-  isLoading,
-  error,
-  user,
-}: MockAuth0State = {}) {
+export function mockUseAuth0({ isAuthenticated, isLoading, error, user }: MockAuth0State = {}) {
   const loginWithRedirect = vi.fn();
   const logout = vi.fn();
   const getAccessTokenSilently = vi.fn();

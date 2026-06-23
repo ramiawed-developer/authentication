@@ -3,17 +3,12 @@ type AppEnvironment = "development" | "test" | "stage" | "production";
 function getAppEnv(): AppEnvironment {
   const value = import.meta.env.VITE_APP_ENV || "development";
 
-  if (
-    value === "development" ||
-    value === "test" ||
-    value === "stage" ||
-    value === "production"
-  ) {
+  if (value === "development" || value === "test" || value === "stage" || value === "production") {
     return value;
   }
 
   throw new Error(
-    `Invalid VITE_APP_ENV: ${value}. Expected development, test, stage, or production.`,
+    `Invalid VITE_APP_ENV: ${value}. Expected development, test, stage, or production.`
   );
 }
 

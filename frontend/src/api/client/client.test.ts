@@ -12,7 +12,7 @@ describe("apiClient", () => {
       vi.fn().mockResolvedValue({
         ok: true,
         json: async () => ({ message: "success" }),
-      }),
+      })
     );
 
     const result = await apiClient<{ message: "success" }>({
@@ -26,7 +26,7 @@ describe("apiClient", () => {
         headers: expect.objectContaining({
           "Content-Type": "application/json",
         }),
-      }),
+      })
     );
   });
 
@@ -36,13 +36,13 @@ describe("apiClient", () => {
       vi.fn().mockReturnValue({
         ok: false,
         status: 500,
-      }),
+      })
     );
 
     await expect(
       apiClient<{ message: string }>({
         path: "/api/test",
-      }),
+      })
     ).rejects.toThrow("API request failed with status 500");
   });
 });

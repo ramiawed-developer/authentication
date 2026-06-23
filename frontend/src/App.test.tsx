@@ -21,13 +21,11 @@ describe("App", () => {
           service: "auth0-fullstack-api",
           timestamp: "2026-06-15T12:00:00.000Z",
         }),
-      }),
+      })
     );
     render(<App />);
 
-    expect(
-      screen.getByRole("heading", { name: /auth0 full-stack app/i }),
-    ).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: /auth0 full-stack app/i })).toBeInTheDocument();
 
     expect(screen.getByText(/frontend is running./i)).toBeInTheDocument();
     expect(screen.getByText(/environment:/i)).toBeInTheDocument();
