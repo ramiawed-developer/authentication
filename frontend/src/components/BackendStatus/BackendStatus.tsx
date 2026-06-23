@@ -1,19 +1,11 @@
 import { useEffect, useState } from "react";
-import type { HealthResponse } from "../api/types";
-import { getHealth } from "../api/health";
+import type { HealthResponse } from "../../api/types";
+import { getHealth } from "../../api/health";
 
 type RequestState =
-  | {
-      status: "loading";
-    }
-  | {
-      status: "success";
-      data: HealthResponse;
-    }
-  | {
-      status: "error";
-      message: string;
-    };
+  | { status: "loading" }
+  | { status: "success"; data: HealthResponse }
+  | { status: "error"; message: string };
 
 export function BackendStatus() {
   const [state, setState] = useState<RequestState>({ status: "loading" });

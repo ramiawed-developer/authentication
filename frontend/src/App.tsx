@@ -1,3 +1,4 @@
+import { AuthStatus } from "./components/AuthStatus";
 import { BackendStatus } from "./components/BackendStatus";
 import { env } from "./config/env";
 
@@ -10,6 +11,10 @@ export default function App() {
       <p>API URL: {env.apiBaseUrl}</p>
       <p>Auth0 Domain: {env.auth0.domain}</p>
       <p>Auth0 Audience: {env.auth0.audience}</p>
+      <hr />
+
+      <AuthStatus />
+
       <hr />
 
       <BackendStatus />
