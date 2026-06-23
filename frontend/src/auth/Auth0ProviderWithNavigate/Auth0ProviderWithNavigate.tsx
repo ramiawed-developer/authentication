@@ -8,9 +8,7 @@ type Auth0ProviderWithNavigateProps = {
   children: ReactNode;
 };
 
-export function Auth0ProviderWithNavigate({
-  children,
-}: Auth0ProviderWithNavigateProps) {
+export function Auth0ProviderWithNavigate({ children }: Auth0ProviderWithNavigateProps) {
   const navigate = useNavigate();
   function handleRedirectCallback(appState?: AppState) {
     navigate(appState?.returnTo ?? "/", { replace: true });

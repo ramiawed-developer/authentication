@@ -32,12 +32,7 @@ export function AuthStatus() {
 
       <h3>User Profile</h3>
       {user?.picture && (
-        <img
-          src={user.picture}
-          alt={user.name ?? "User Profile"}
-          width={64}
-          height={64}
-        />
+        <img src={user.picture} alt={user.name ?? "User Profile"} width={64} height={64} />
       )}
       <p>Name: {user?.name ?? "Unknown"}</p>
       <p>Email: {user?.email ?? "Unknown"}</p>

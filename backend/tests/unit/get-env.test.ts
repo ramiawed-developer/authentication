@@ -1,9 +1,5 @@
 import { afterEach, describe, expect, it } from "vitest";
-import {
-  getNumberEnv,
-  getOptionalEnv,
-  getRequiredEnv,
-} from "../../src/config/get-env.js";
+import { getNumberEnv, getOptionalEnv, getRequiredEnv } from "../../src/config/get-env.js";
 
 describe("environment phelps", () => {
   const originalEnv = process.env;
@@ -23,7 +19,7 @@ describe("environment phelps", () => {
 
   it("getRequiredEnv throw when value is missing", () => {
     expect(() => getRequiredEnv("TEST_KEY")).toThrow(
-      `Missing required environment variable: TEST_KEY`,
+      `Missing required environment variable: TEST_KEY`
     );
   });
 
@@ -50,7 +46,7 @@ describe("environment phelps", () => {
     };
 
     expect(() => getNumberEnv("TEST_KEY", 4000)).toThrow(
-      `Environment variable TEST_KEY must be a number`,
+      `Environment variable TEST_KEY must be a number`
     );
   });
 });

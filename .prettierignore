@@ -1,0 +1,17 @@
+node_modules
+dist
+build
+coverage
+
+frontend/dist
+backend/dist
+
+package-lock.json
+
+.env
+.env.*
+!.env.example
+!.env.development.example
+!.env.test.example
+!.env.stage.example
+!.env.production.example

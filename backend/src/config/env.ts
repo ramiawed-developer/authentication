@@ -5,17 +5,10 @@ type AppEnvironment = "development" | "test" | "stage" | "production";
 function getNodeEnv(): AppEnvironment {
   const value = process.env.NODE_ENV || "development";
 
-  if (
-    value === "development" ||
-    value === "test" ||
-    value === "stage" ||
-    value === "production"
-  ) {
+  if (value === "development" || value === "test" || value === "stage" || value === "production") {
     return value;
   }
-  throw new Error(
-    `Invalid NODE_ENV: ${value}. Expected development, test, stage, or production`,
-  );
+  throw new Error(`Invalid NODE_ENV: ${value}. Expected development, test, stage, or production`);
 }
 
 export const env = {

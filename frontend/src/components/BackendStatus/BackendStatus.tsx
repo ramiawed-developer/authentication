@@ -26,10 +26,7 @@ export function BackendStatus() {
         if (!ignore) {
           setState({
             status: "error",
-            message:
-              error instanceof Error
-                ? error.message
-                : "Unable to load backend status",
+            message: error instanceof Error ? error.message : "Unable to load backend status",
           });
         }
       }

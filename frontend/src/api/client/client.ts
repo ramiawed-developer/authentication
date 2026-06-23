@@ -5,10 +5,7 @@ type ApiClientOptions = {
   init?: RequestInit;
 };
 
-export async function apiClient<TResponse>({
-  path,
-  init,
-}: ApiClientOptions): Promise<TResponse> {
+export async function apiClient<TResponse>({ path, init }: ApiClientOptions): Promise<TResponse> {
   const url = `${env.apiBaseUrl}${path}`;
   const response = await fetch(url, {
     ...init,
