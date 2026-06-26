@@ -1,3 +1,4 @@
+import { AccessTokenPreview } from "./components/AccessTokenPreview/AccessTokenPreview";
 import { AuthStatus } from "./components/AuthStatus";
 import { BackendStatus } from "./components/BackendStatus";
 import { env } from "./config/env";
@@ -14,6 +15,7 @@ export default function App() {
       <hr />
 
       <AuthStatus />
+      <AccessTokenPreview />
 
       <hr />
 

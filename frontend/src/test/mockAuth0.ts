@@ -1,15 +1,17 @@
 import { vi } from "vitest";
 
+type MockAuth0User = {
+  name?: string;
+  email?: string;
+  picture?: string;
+  sub?: string;
+};
+
 type MockAuth0State = {
   isAuthenticated?: boolean;
   isLoading?: boolean;
   error?: Error;
-  user?: {
-    name?: string;
-    email?: string;
-    picture?: string;
-    sub?: string;
-  };
+  user?: MockAuth0User;
 };
 
 export function mockUseAuth0({ isAuthenticated, isLoading, error, user }: MockAuth0State = {}) {
