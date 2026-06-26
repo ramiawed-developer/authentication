@@ -3,7 +3,7 @@ import { apiClient } from "./client";
 
 describe("apiClient", () => {
   afterEach(() => {
-    vi.resetAllMocks();
+    vi.restoreAllMocks();
   });
 
   it("returns JSON when the request succeeds", async () => {
