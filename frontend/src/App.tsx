@@ -1,6 +1,7 @@
 import { AccessTokenPreview } from "./components/AccessTokenPreview/AccessTokenPreview";
 import { AuthStatus } from "./components/AuthStatus";
 import { BackendStatus } from "./components/BackendStatus";
+import { ProtectedMessage } from "./components/ProtectedMessage";
 import { env } from "./config/env";
 
 export default function App() {
@@ -16,7 +17,7 @@ export default function App() {
 
       <AuthStatus />
       <AccessTokenPreview />
-
+      <ProtectedMessage />
       <hr />
 
       <BackendStatus />
