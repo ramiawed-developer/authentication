@@ -2,6 +2,9 @@ import cors from "cors";
 import express from "express";
 import { healthRouter } from "./routes/health.routes.js";
 import { env } from "./config/env.js";
+import { publicRouter } from "./routes/public/public.routes.js";
+import { privateRouter } from "./routes/private/private.routes.js";
+import { requireAuth } from "./middleware/auth/require-auth.js";
 
 export function createApp() {
   const app = express();
@@ -14,5 +17,7 @@ export function createApp() {
 
   app.use(express.json());
   app.use("/api/health", healthRouter);
+  app.use("/api/public", publicRouter);
+  app.use("/api/private", requireAuth, privateRouter);
   return app;
 }
