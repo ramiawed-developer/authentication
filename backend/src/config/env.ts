@@ -20,6 +20,6 @@ export const env = {
     audience: getRequiredEnv("AUTH0_AUDIENCE"),
   },
   database: {
-    url: process.env.DATABASE_URL || "",
+    url: getRequiredEnv("DATABASE_URL"),
   },
 } as const;
