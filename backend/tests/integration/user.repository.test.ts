@@ -1,9 +1,9 @@
 import { describe, it, expect, beforeEach } from "vitest";
-import { UserRepository } from "../../src/modules/users/index.js";
+import { PrismaUserRepository } from "../../src/modules/users/index.js";
 import { prisma } from "../../src/db/index.js";
 
 describe("UserRepository", () => {
-  const repository = new UserRepository(prisma);
+  const repository = new PrismaUserRepository(prisma);
 
   beforeEach(async () => {
     await prisma.user.deleteMany();

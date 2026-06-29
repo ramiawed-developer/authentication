@@ -1,6 +1,5 @@
 import { User } from "../../../generated/prisma/client.js";
-import { UserRepository } from "../repositories/index.js";
-import type { CreateUserInput } from "../repositories/index.js";
+import type { CreateUserInput, UserRepositoryContract } from "../repositories/index.js";
 
 export type AuthenticatedUserProfile = {
   auth0Id: string;
@@ -10,7 +9,7 @@ export type AuthenticatedUserProfile = {
 };
 
 export class UserService {
-  constructor(private readonly userRespository: UserRepository) {}
+  constructor(private readonly userRespository: UserRepositoryContract) {}
 
   async findOrCreateFromAuth0Profile(profile: AuthenticatedUserProfile): Promise<User> {
     const existingUser = await this.userRespository.findByAuth0Id(profile.auth0Id);
