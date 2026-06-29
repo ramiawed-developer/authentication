@@ -1,5 +1,5 @@
 import { User } from "../../src/generated/prisma/client.js";
-import { UserService, type UserRepository } from "../../src/modules/users/index.js";
+import { UserService, type UserRepositoryContract } from "../../src/modules/users/index.js";
 import { describe, it, vi, expect } from "vitest";
 
 function createMockUser(overrides: Partial<User> = {}): User {
@@ -16,12 +16,12 @@ function createMockUser(overrides: Partial<User> = {}): User {
   };
 }
 
-function createMockRespository(): UserRepository {
+function createMockRespository(): UserRepositoryContract {
   return {
     findByAuth0Id: vi.fn(),
     create: vi.fn(),
     updateProfile: vi.fn(),
-  } as unknown as UserRepository;
+  };
 }
 
 describe("UserService", () => {

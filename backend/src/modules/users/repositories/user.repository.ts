@@ -1,19 +1,7 @@
 import { PrismaClient, type User } from "../../../generated/prisma/client.js";
+import type { CreateUserInput, UpdateUserProfileInput, UserRepositoryContract } from "./index.js";
 
-export type CreateUserInput = {
-  auth0Id: string;
-  email?: string | null;
-  name?: string | null;
-  picture?: string | null;
-};
-
-export type UpdateUserProfileInput = {
-  email?: string | null;
-  name?: string | null;
-  picture?: string | null;
-};
-
-export class UserRepository {
+export class PrismaUserRepository implements UserRepositoryContract {
   constructor(private readonly prisma: PrismaClient) {}
 
   findByAuth0Id(auth0Id: string): Promise<User | null> {
