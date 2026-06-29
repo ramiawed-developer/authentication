@@ -1,10 +1,11 @@
+import type { Request } from "express";
 import type { AuthenticatedUserProfile } from "../../modules/users/index.js";
 
 type AuthPayload = {
   sub?: string;
-  name?: string;
-  email?: string;
-  picture?: string;
+  email?: unknown;
+  name?: unknown;
+  picture?: unknown;
 };
 
 type RequestWithAuth = Request & {
@@ -19,12 +20,12 @@ function getOptionalStringClaim(value: unknown): string | null {
 
 export function extractAuthenticatedUserProfile(req: Request): AuthenticatedUserProfile {
   const authReq = req as RequestWithAuth;
-  const payload = authReq?.auth?.payload;
+  const payload = authReq.auth?.payload;
 
   const auth0Id = payload?.sub;
 
   if (!auth0Id) {
-    throw new Error("Authenticated request is missing Auth0 subject claim");
+    throw new Error("Authenticated request is missing Auth0 subject claim.");
   }
 
   return {

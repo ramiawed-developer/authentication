@@ -1,19 +1,24 @@
-import { describe, it, beforeEach, expect } from "vitest";
 import express from "express";
-import { meRouter } from "../../src/routes/me/me.routes.js";
-import { prisma } from "../../src/db/prisma.js";
 import request from "supertest";
+import { beforeEach, describe, expect, it } from "vitest";
+import { prisma } from "../../src/db/index.js";
+import { meRouter } from "../../src/routes/me/index.js";
 
 function createTestAppWithAuthPayload(payload: Record<string, unknown>) {
   const app = express();
+
   app.use(express.json());
+
   app.use((req, _res, next) => {
     Object.assign(req, {
-      auth: { payload },
+      auth: {
+        payload,
+      },
     });
 
     next();
   });
+
   app.use("/api/me", meRouter);
 
   return app;
@@ -24,7 +29,7 @@ describe("GET /api/me", () => {
     await prisma.user.deleteMany();
   });
 
-  it("creates and return the user when they do not exist", async () => {
+  it("creates and returns the user when they do not exist", async () => {
     const app = createTestAppWithAuthPayload({
       sub: "auth0|me_create",
       email: "me-create@example.com",
@@ -32,10 +37,11 @@ describe("GET /api/me", () => {
       picture: "https://example.com/me-create.png",
     });
 
-    const result = await request(app).get("/api/me");
+    const response = await request(app).get("/api/me");
 
-    expect(result.status).toBe(200);
-    expect(result.body.user).toEqual(
+    expect(response.status).toBe(200);
+
+    expect(response.body.user).toEqual(
       expect.objectContaining({
         auth0Id: "auth0|me_create",
         email: "me-create@example.com",
@@ -45,16 +51,21 @@ describe("GET /api/me", () => {
       })
     );
 
-    const userIdDatabase = await prisma.user.findUnique({
+    expect(response.body.user.id).toEqual(expect.any(String));
+    expect(response.body.user.createdAt).toEqual(expect.any(String));
+    expect(response.body.user.updatedAt).toEqual(expect.any(String));
+
+    const userInDatabase = await prisma.user.findUnique({
       where: {
         auth0Id: "auth0|me_create",
       },
     });
 
-    expect(userIdDatabase).not.toBeNull();
+    expect(userInDatabase).not.toBeNull();
+    expect(userInDatabase?.email).toBe("me-create@example.com");
   });
 
-  it("updates and retuns the user when they already exist", async () => {
+  it("updates and returns the user when they already exist", async () => {
     await prisma.user.create({
       data: {
         auth0Id: "auth0|me_existing",
@@ -68,20 +79,31 @@ describe("GET /api/me", () => {
       sub: "auth0|me_existing",
       email: "new@example.com",
       name: "New Name",
-      picture: "https://example.com/new_picture.png",
+      picture: "https://example.com/new.png",
     });
 
-    const result = await request(app).get("/api/me");
+    const response = await request(app).get("/api/me");
 
-    expect(result.status).toBe(200);
-    expect(result.body.user).toEqual(
+    expect(response.status).toBe(200);
+
+    expect(response.body.user).toEqual(
       expect.objectContaining({
         auth0Id: "auth0|me_existing",
         email: "new@example.com",
         name: "New Name",
-        picture: "https://example.com/new_picture.png",
+        picture: "https://example.com/new.png",
         role: "USER",
       })
     );
+
+    const userInDatabase = await prisma.user.findUnique({
+      where: {
+        auth0Id: "auth0|me_existing",
+      },
+    });
+
+    expect(userInDatabase?.email).toBe("new@example.com");
+    expect(userInDatabase?.name).toBe("New Name");
+    expect(userInDatabase?.picture).toBe("https://example.com/new.png");
   });
 });

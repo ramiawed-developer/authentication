@@ -1,16 +1,16 @@
 import { Router } from "express";
 import { extractAuthenticatedUserProfile } from "../../middleware/auth/index.js";
 import { userService } from "../../modules/users/user.module.js";
+import type { MeResponse } from "./me.types.js";
 
 export const meRouter = Router();
 
 meRouter.get("/", async (req, res, next) => {
   try {
-    const profile = extractAuthenticatedUserProfile(req as unknown as Request);
-
+    const profile = extractAuthenticatedUserProfile(req);
     const user = await userService.findOrCreateFromAuth0Profile(profile);
 
-    res.status(200).json({
+    const response: MeResponse = {
       user: {
         id: user.id,
         auth0Id: user.auth0Id,
@@ -21,7 +21,9 @@ meRouter.get("/", async (req, res, next) => {
         createdAt: user.createdAt.toISOString(),
         updatedAt: user.updatedAt.toISOString(),
       },
-    });
+    };
+
+    res.status(200).json(response);
   } catch (error) {
     next(error);
   }
