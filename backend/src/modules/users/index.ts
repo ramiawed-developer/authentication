@@ -1,4 +1,10 @@
-export type { CreateUserInput, UpdateUserProfileInput } from "./repositories/index.js";
-export { type UserRepositoryContract, PrismaUserRepository } from "./repositories/index.js";
-export type { AuthenticatedUserProfile } from "./services/index.js";
 export { UserService } from "./services/index.js";
+export { PrismaUserRepository } from "./repositories/index.js";
+
+export type { AuthenticatedUserProfile } from "./services/index.js";
+
+export type {
+  CreateUserInput,
+  UpdateUserProfileInput,
+  UserRepositoryContract,
+} from "./repositories/index.js";

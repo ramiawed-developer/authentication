@@ -3,4 +3,4 @@ export type {
   UpdateUserProfileInput,
   UserRepositoryContract,
 } from "./user.repository.contract.js";
-export { PrismaUserRepository } from "./user.repository.js";
+export { PrismaUserRepository } from "./prisma-user.repository.js";
