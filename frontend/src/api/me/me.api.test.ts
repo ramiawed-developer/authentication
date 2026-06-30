@@ -64,4 +64,20 @@ describe("getMe", () => {
       "Authenticated API request failed with status 401"
     );
   });
+
+  it("throws when /api/me returns invalid response shape", async () => {
+    vi.stubGlobal(
+      "fetch",
+      vi.fn().mockResolvedValue({
+        ok: true,
+        json: async () => ({
+          currentUser: {
+            id: "user-id",
+          },
+        }),
+      })
+    );
+
+    await expect(getMe("test-access-token")).rejects.toThrow();
+  });
 });

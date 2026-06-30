@@ -21,6 +21,7 @@ export function Auth0ProviderWithNavigate({ children }: Auth0ProviderWithNavigat
       authorizationParams={{
         redirect_uri: window.location.origin,
         audience: env.auth0.audience,
+        scope: "openid profile name",
       }}
       onRedirectCallback={handleRedirectCallback}
     >

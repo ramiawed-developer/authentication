@@ -1,2 +1,3 @@
 export { getMe } from "./me.api";
-export type { CurrentUser, MeResponse, UserRole } from "./me.types";
+export { MeResponseSchema, UserRoleSchema } from "./me.schema";
+export type { CurrentUser, MeResponse, UserRole } from "./me.schema";
