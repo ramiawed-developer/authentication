@@ -34,6 +34,7 @@ jobs:
 
       - name: Install root dependencies
         run: npm ci
+        working-directory: .
 
       - name: Check formatting
         run: npm run format:check
@@ -55,6 +56,7 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
+        working-directory: .
 
       - name: Typecheck contracts
         run: npm run contracts:typecheck
@@ -109,6 +111,7 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
+        working-directory: .
 
       - name: Build contracts
         run: npm run contracts:build
@@ -160,6 +163,7 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
+        working-directory: .
 
       - name: Build contracts
         run: npm run contracts:build
