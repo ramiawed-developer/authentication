@@ -1,5 +1,6 @@
 import { useCallback, useState } from "react";
-import { getMe, type CurrentUser } from "../../api/me";
+import { getMe } from "../../api/me";
+import type { CurrentUser } from "../../api/me";
 import { useAuth0 } from "@auth0/auth0-react";
 
 export type CurrentUserState =

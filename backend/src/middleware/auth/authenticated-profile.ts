@@ -28,6 +28,17 @@ export function extractAuthenticatedUserProfile(req: Request): AuthenticatedUser
     throw new Error("Authenticated request is missing Auth0 subject claim.");
   }
 
+  /**
+   * Access tokens always need a stable subject claim for identity.
+   * Profile claims such as email, name, and picture are optional because
+   * API access tokens do not always include OIDC profile data.
+   *
+   * Future profile enrichment options:
+   * - use Auth0 /userinfo with openid profile email scopes
+   * - copy selected ID token profile fields from frontend to backend
+   * - add custom namespaced claims through Auth0 Actions
+   */
+
   return {
     auth0Id,
     email: getOptionalStringClaim(payload.email),

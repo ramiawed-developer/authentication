@@ -1,7 +1,8 @@
 import { Router } from "express";
 import { extractAuthenticatedUserProfile } from "../../middleware/auth/index.js";
 import { userService } from "../../modules/users/user.module.js";
-import type { MeResponse } from "./me.types.js";
+import { MeResponseSchema } from "./me.schema.js";
+import type { MeResponse } from "./me.schema.js";
 
 export const meRouter = Router();
 
@@ -23,7 +24,9 @@ meRouter.get("/", async (req, res, next) => {
       },
     };
 
-    res.status(200).json(response);
+    const validateResponse = MeResponseSchema.parse(response);
+
+    res.status(200).json(validateResponse);
   } catch (error) {
     next(error);
   }
