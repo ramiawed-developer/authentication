@@ -1,8 +1,8 @@
 import { Router } from "express";
 import { extractAuthenticatedUserProfile } from "../../middleware/auth/index.js";
 import { userService } from "../../modules/users/user.module.js";
-import { MeResponseSchema } from "./me.schema.js";
-import type { MeResponse } from "./me.schema.js";
+import { MeResponseSchema } from "@authentication/contracts";
+import type { MeResponse } from "@authentication/contracts";
 
 export const meRouter = Router();
 

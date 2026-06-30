@@ -1,3 +1,3 @@
 export { getMe } from "./me.api";
-export { MeResponseSchema, UserRoleSchema } from "./me.schema";
-export type { CurrentUser, MeResponse, UserRole } from "./me.schema";
+export { MeResponseSchema, UserRoleSchema } from "@authentication/contracts";
+export type { CurrentUser, MeResponse, UserRole } from "@authentication/contracts";

@@ -12,6 +12,7 @@
     "test:unit": "vitest run src"
   },
   "dependencies": {
+    "@authentication/contracts": "1.0.0",
     "@auth0/auth0-react": "^2.19.0",
     "react": "^19.2.6",
     "react-dom": "^19.2.6",
