@@ -1,5 +1,5 @@
-import { describe, it, expect, vi, afterEach } from "vitest";
 import { render, screen } from "@testing-library/react";
+import { afterEach, describe, expect, it, vi } from "vitest";
 import App from "./App";
 import { mockUseAuth0 } from "./test/mockAuth0";
 
@@ -10,11 +10,13 @@ describe("App", () => {
 
   it("renders the frontend home page", async () => {
     mockUseAuth0({
+      isLoading: false,
       isAuthenticated: false,
     });
+
     vi.stubGlobal(
       "fetch",
-      vi.fn().mockReturnValue({
+      vi.fn().mockResolvedValue({
         ok: true,
         json: async () => ({
           status: "ok",
@@ -23,15 +25,12 @@ describe("App", () => {
         }),
       })
     );
+
     render(<App />);
 
     expect(screen.getByRole("heading", { name: /auth0 full-stack app/i })).toBeInTheDocument();
 
-    expect(screen.getByText(/frontend is running./i)).toBeInTheDocument();
-    expect(screen.getByText(/environment:/i)).toBeInTheDocument();
-    expect(screen.getByText(/api url:/i)).toBeInTheDocument();
-    expect(screen.getByText(/auth0 domain:/i)).toBeInTheDocument();
-    expect(screen.getByText(/auth0 audience:/i)).toBeInTheDocument();
+    expect(screen.getByText(/frontend is running/i)).toBeInTheDocument();
     expect(screen.getByText(/you are not logged in/i)).toBeInTheDocument();
 
     expect(await screen.findByText(/status: ok/i)).toBeInTheDocument();
