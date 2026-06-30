@@ -34,6 +34,7 @@ jobs:
 
       - name: Install root dependencies
         run: npm ci
+        working-directory: .
 
       - name: Check formatting
         run: npm run format:check
@@ -55,6 +56,7 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
+        working-directory: .
 
       - name: Typecheck contracts
         run: npm run contracts:typecheck
@@ -105,10 +107,11 @@ jobs:
         with:
           node-version: 22
           cache: npm
-          cache-dependency-path: backend/package-lock.json
+          cache-dependency-path: package-lock.json
 
       - name: Install dependencies
         run: npm ci
+        working-directory: .
 
       - name: Build contracts
         run: npm run contracts:build
@@ -156,10 +159,11 @@ jobs:
         with:
           node-version: 22
           cache: npm
-          cache-dependency-path: frontend/package-lock.json
+          cache-dependency-path: package-lock.json
 
       - name: Install dependencies
         run: npm ci
+        working-directory: .
 
       - name: Build contracts
         run: npm run contracts:build
