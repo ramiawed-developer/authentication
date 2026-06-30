@@ -60,10 +60,10 @@ jobs:
         run: npm run contracts:typecheck
 
       - name: Test Contract
-        run: contracts:test
+        run: npm run contracts:test
 
       - name: Build contract
-        run: contracts:build
+        run: npm run contracts:build
 
   backend:
     name: Backend checks
