@@ -1,7 +1,8 @@
-import { describe, it, expect } from "vitest";
-import { MeResponseSchema } from "../../src/routes/me/me.schema.js";
+import { describe, expect, it } from "vitest";
+import { MeResponseSchema } from "./me.contract.js";
+
 describe("MeResponseSchema", () => {
-  it("validate a valid /api/me response", () => {
+  it("validates a valid /api/me response", () => {
     const result = MeResponseSchema.safeParse({
       user: {
         id: "user-id",
@@ -18,7 +19,7 @@ describe("MeResponseSchema", () => {
     expect(result.success).toBe(true);
   });
 
-  it("validate nullable optional profile fields", () => {
+  it("allows nullable profile fields", () => {
     const result = MeResponseSchema.safeParse({
       user: {
         id: "user-id",
@@ -37,8 +38,25 @@ describe("MeResponseSchema", () => {
 
   it("rejects invalid response shape", () => {
     const result = MeResponseSchema.safeParse({
+      currentUser: {
+        id: "user-id",
+      },
+    });
+
+    expect(result.success).toBe(false);
+  });
+
+  it("rejects invalid role", () => {
+    const result = MeResponseSchema.safeParse({
       user: {
         id: "user-id",
+        auth0Id: "auth0|123",
+        email: "user@example.com",
+        name: "Test User",
+        picture: null,
+        role: "SUPER_ADMIN",
+        createdAt: "2026-01-01T00:00:00.000Z",
+        updatedAt: "2026-01-01T00:00:00.000Z",
       },
     });
 
